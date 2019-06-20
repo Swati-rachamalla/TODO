@@ -1,0 +1,57 @@
+
+<div style="display: flex;justify-content: flex-end;">
+  <button class="btn btn-danger" (click)="logout()">logout</button>
+</div>
+<div class="container">
+  
+
+      <mat-card><h1 class="text-center ">My Todo List <span class="label label-info">{{getTotalTodos()}}</span></h1></mat-card>
+      <button  mat-raised-button [routerLink]="['/todo']" color='primary'>Create</button>
+
+        <mat-table  [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Position Column -->
+            {{element}}
+            <ng-container matColumnDef="todo_number">
+              <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.todo_number}} </mat-cell>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="todo_name">
+              <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.todo_name}} </mat-cell>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="todo_desc">
+              <mat-header-cell *matHeaderCellDef> Description</mat-header-cell>
+              <mat-cell *matCellDef="let element" > {{element.todo_desc}} </mat-cell>
+            </ng-container>
+
+            
+            <ng-container matColumnDef="Edit">
+                <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{element.todo_number}}
+                  <button mat-raised-button [routerLink]="['/edit',element.todo_number]" color="primary">
+                    <i class="material-icons">
+                    <b style="color:beige">edit</b>
+                    </i>
+                  </button></mat-cell>
+                    
+              </ng-container>
+
+            <ng-container matColumnDef="Delete">
+                <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+                <mat-cell *matCellDef="let element"><button mat-raised-button (click)="onRemove(element.todo_number)" ng-click color="warn"><i class="material-icons">
+                    delete
+                    </i></button></mat-cell>
+              </ng-container>
+          
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+
+</div>
+
+
